@@ -42,15 +42,18 @@ async function handleOption1(client, from, msg, phoneNumber) {
 
     const formattedData = datas.map((item, index) => {
       let no = index + 1;
-      return (
-        `*${no}. ${item.nm_mk}*\n` +
-        `    Tanggal: ${item.tgl_awal}\n` +
-        `    Waktu: ${item.jam_awal} - ${item.jam_akhir}\n` +
-        `    Ruang: ${item.ruang}\n` +
-        `    Keterangan: ${item.ket_perkuliahan}\n` +
-        `    Link: ${item.link}  \n` +
-        `    Code: ${item.passcode}\n`
-      );
+      let text = `*${no}. ${item.nm_mk}*\n` +
+                 `    Tanggal: ${item.tgl_awal}\n` +
+                 `    Waktu: ${item.jam_awal} - ${item.jam_akhir}\n` +
+                 `    Ruang: ${item.ruang}\n` +
+                 `    Keterangan: ${item.ket_perkuliahan}\n`;
+
+      if (item.ket) {
+        text += `    Link: ${item.link}\n` +
+                `    Code: ${item.passcode}\n`;
+      }
+
+      return text;
     });
 
     const responseData = `*Jadwal Kuliah Hari Ini* 📚\n\n${formattedData.join("\n")}`;
@@ -80,15 +83,18 @@ async function handleOption2(client, from, msg, phoneNumber) {
 
     const formattedData = datas.map((item, index) => {
       let no = index + 1;
-      return (
-        `*${no}. ${item.nm_mk}*\n` +
-        `    Tanggal: ${item.tgl_awal}\n` +
-        `    Waktu: ${item.jam_awal} - ${item.jam_akhir}\n` +
-        `    Ruang: ${item.ruang}\n` +
-        `    Keterangan: ${item.ket_perkuliahan}\n` +
-        `    Link: ${item.link}  \n` +
-        `    Code: ${item.passcode}\n`
-      );
+      let text = `*${no}. ${item.nm_mk}*\n` +
+                 `    Tanggal: ${item.tgl_awal}\n` +
+                 `    Waktu: ${item.jam_awal} - ${item.jam_akhir}\n` +
+                 `    Ruang: ${item.ruang}\n` +
+                 `    Keterangan: ${item.ket_perkuliahan}\n`;
+
+      if (item.ket) {
+        text += `    Link: ${item.link}\n` +
+                `    Code: ${item.passcode}\n`;
+      }
+
+      return text;
     });
 
     const responseData = `*Jadwal Kuliah Minggu Ini* 📚🗒\n\n${formattedData.join("\n")}`;
@@ -159,7 +165,7 @@ async function handleOption5(client, from, msg, phoneNumber) {
     });
 
     const datas = response.data.data;
-    console.log(response.data);
+    // console.log(response.data);
     const formattedData = datas.map((item) => {
       return `*${item.nm_mk}*\n` + `Nilai: ${item.NILAI_FINAL}\n`;
     });
@@ -179,7 +185,7 @@ async function handleOption5(client, from, msg, phoneNumber) {
 async function handleOption6(client, from, msg) {
   await client.reply(
     from,
-    `Mohon maaf atas kendala yang terjadi. Anda dapat melaporkan kendala tersebut kepada admin kami melalui wa.me/62895360759393`,
+    `Mohon maaf atas kendala yang terjadi, Anda dapat melaporkan kendala tersebut kepada admin kami melalui wa.me/62895360759393`,
     msg.id.toString()
   );
 }
