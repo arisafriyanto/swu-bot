@@ -27,21 +27,22 @@ SWU Bot is a backend service designed to reply to WhatsApp messages using the SW
 #### 4. Copy the `.env.example` file, rename it to `.env` and edit the `.env` file in the main directory, making sure the configuration values are appropriate:
 
    ```bash
-    PORT=8000
-    ENCRYPT_KEY=YOUR_ENCRYPT_KEY
-    API_URL=YOUR_API_URL
+   PORT=8000
+   ENCRYPT_KEY=YOUR_ENCRYPT_KEY
+   API_URL=YOUR_API_URL
    ```
   
 #### 5. Start the Services:
-    ```bash
-    npm run start
-    ```
+
+   ```bash
+   npm run start
+   ```
 
    or
 
-    ```bash
-    node index.js
-    ```
+   ```bash
+   node index.js
+   ```
 
 #### 6. Scan QR Code with WhatsApp
 
