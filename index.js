@@ -15,7 +15,7 @@ app.use(express.json());
 let client = null;
 
 app.get("/", (req, res) => {
-  if (client && client.isLogged) {
+  if (client && client.isInChat) {
     return res.status(200).json({ message: "Anda telah terhubung ke WhatsApp" });
   }
 
@@ -35,7 +35,6 @@ app.get("/", (req, res) => {
       logQR: false,
       statusFind: (statusSession, session) => {
         //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail || autocloseCalled || desconnectedMobile || deleteToken
-
         if (statusSession === "isLogged") {
           return res.status(200).json({ message: "Anda telah terhubung ke WhatsApp" });
         }

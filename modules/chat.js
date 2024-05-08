@@ -5,11 +5,12 @@ require("dotenv").config();
 
 const { API_URL } = process.env;
 
-async function handleMenuOption(client, msg, from, split_message) {
+async function handleMenuOption(client, msg, from) {
   const menu = ["1", "2", "3", "4", "5", "6"];
 
   const phoneNumber = from.split("@")[0];
-  // console.log(phoneNumber);
+
+  const message = msg.body;
 
   if (msg.body == "1") {
     handleOption1(client, from, msg, phoneNumber);
@@ -23,7 +24,7 @@ async function handleMenuOption(client, msg, from, split_message) {
     handleOption5(client, from, msg, phoneNumber);
   } else if (msg.body == "6") {
     handleOption6(client, from, msg);
-  } else if (split_message.length > 1) {
+  } else if (message.length > 1) {
     return;
   } else if (!menu.includes(msg.body)) {
     handleDefaultMenu(client, from, msg);
@@ -42,15 +43,15 @@ async function handleOption1(client, from, msg, phoneNumber) {
 
     const formattedData = datas.map((item, index) => {
       let no = index + 1;
-      let text = `*${no}. ${item.nm_mk}*\n` +
-                 `    Tanggal: ${item.tgl_awal}\n` +
-                 `    Waktu: ${item.jam_awal} - ${item.jam_akhir}\n` +
-                 `    Ruang: ${item.ruang}\n` +
-                 `    Keterangan: ${item.ket_perkuliahan}\n`;
+      let text =
+        `*${no}. ${item.nm_mk}*\n` +
+        `    Tanggal: ${item.tgl_awal}\n` +
+        `    Waktu: ${item.jam_awal} - ${item.jam_akhir}\n` +
+        `    Ruang: ${item.ruang}\n` +
+        `    Keterangan: ${item.ket_perkuliahan}\n`;
 
       if (item.ket) {
-        text += `    Link: ${item.link}\n` +
-                `    Code: ${item.passcode}\n`;
+        text += `    Link: ${item.link}\n` + `    Code: ${item.passcode}\n`;
       }
 
       return text;
@@ -83,15 +84,15 @@ async function handleOption2(client, from, msg, phoneNumber) {
 
     const formattedData = datas.map((item, index) => {
       let no = index + 1;
-      let text = `*${no}. ${item.nm_mk}*\n` +
-                 `    Tanggal: ${item.tgl_awal}\n` +
-                 `    Waktu: ${item.jam_awal} - ${item.jam_akhir}\n` +
-                 `    Ruang: ${item.ruang}\n` +
-                 `    Keterangan: ${item.ket_perkuliahan}\n`;
+      let text =
+        `*${no}. ${item.nm_mk}*\n` +
+        `    Tanggal: ${item.tgl_awal}\n` +
+        `    Waktu: ${item.jam_awal} - ${item.jam_akhir}\n` +
+        `    Ruang: ${item.ruang}\n` +
+        `    Keterangan: ${item.ket_perkuliahan}\n`;
 
       if (item.ket) {
-        text += `    Link: ${item.link}\n` +
-                `    Code: ${item.passcode}\n`;
+        text += `    Link: ${item.link}\n` + `    Code: ${item.passcode}\n`;
       }
 
       return text;
