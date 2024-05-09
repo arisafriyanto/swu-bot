@@ -24,8 +24,6 @@ async function handleMenuOption(client, msg, from) {
     handleOption5(client, from, msg, phoneNumber);
   } else if (msg.body == "6") {
     handleOption6(client, from, msg);
-  } else if (message.length > 1) {
-    return;
   } else if (!menu.includes(msg.body)) {
     handleDefaultMenu(client, from, msg);
   }
