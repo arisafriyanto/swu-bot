@@ -5,12 +5,10 @@ require("dotenv").config();
 
 const { API_URL } = process.env;
 
-async function handleMenuOption(client, msg, from) {
+async function handleMenuOption(client, msg, from, split_message) {
   const menu = ["1", "2", "3", "4", "5", "6"];
 
   const phoneNumber = from.split("@")[0];
-
-  const message = msg.body;
 
   if (msg.body == "1") {
     handleOption1(client, from, msg, phoneNumber);
@@ -24,6 +22,8 @@ async function handleMenuOption(client, msg, from) {
     handleOption5(client, from, msg, phoneNumber);
   } else if (msg.body == "6") {
     handleOption6(client, from, msg);
+  } else if (split_message.length > 1) {
+    return;
   } else if (!menu.includes(msg.body)) {
     handleDefaultMenu(client, from, msg);
   }
@@ -48,8 +48,12 @@ async function handleOption1(client, from, msg, phoneNumber) {
         `    Ruang: ${item.ruang}\n` +
         `    Keterangan: ${item.ket_perkuliahan}\n`;
 
-      if (item.ket) {
-        text += `    Link: ${item.link}\n` + `    Code: ${item.passcode}\n`;
+      if (item.link) {
+        text += `    Link: ${item.link}\n`;
+      }
+
+      if (item.passcode) {
+        text += `    Code: ${item.passcode}\n`;
       }
 
       return text;
@@ -89,8 +93,12 @@ async function handleOption2(client, from, msg, phoneNumber) {
         `    Ruang: ${item.ruang}\n` +
         `    Keterangan: ${item.ket_perkuliahan}\n`;
 
-      if (item.ket) {
-        text += `    Link: ${item.link}\n` + `    Code: ${item.passcode}\n`;
+      if (item.link) {
+        text += `    Link: ${item.link}\n`;
+      }
+
+      if (item.passcode) {
+        text += `    Code: ${item.passcode}\n`;
       }
 
       return text;
@@ -120,9 +128,9 @@ async function handleOption3(client, from, msg, phoneNumber) {
     });
 
     const datas = response.data.data;
-    console.log(response.data);
+    // console.log(response.data);
 
-    const responseData = `*Indeks Prestasi Kumulatif* 📊\nNilai: ${datas.IPK} / 4.0`;
+    const responseData = `*Indeks Prestasi Kumulatif* 📊\n\n───────────────\n*Total SKS :* ${datas.SKS}\n*Nilai          :* ${datas.IPK} / 4.0\n───────────────`;
     // console.log(responseData);
     await client.reply(from, `${responseData}`, msg.id.toString());
     return;
@@ -165,8 +173,8 @@ async function handleOption5(client, from, msg, phoneNumber) {
 
     const datas = response.data.data;
     // console.log(response.data);
-    const formattedData = datas.map((item) => {
-      return `*${item.nm_mk}*\n` + `Nilai: ${item.NILAI_FINAL}\n`;
+    const formattedData = datas.map((item, index) => {
+      return `*${index + 1}. ${item.nm_mk}*\n` + `Nilai: ${item.NILAI}\n`;
     });
     const responseData = formattedData.join("\n");
     await client.reply(from, `${responseData}`, msg.id.toString());
