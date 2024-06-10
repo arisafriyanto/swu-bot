@@ -29,6 +29,9 @@ SWU Bot is a backend service designed to reply to WhatsApp messages using the SW
    ```bash
    PORT=8000
    ENCRYPT_KEY=YOUR_ENCRYPT_KEY
+   SECRET_KEY=YOUR_SECRET_KEY
+   USERNAME_WEB=YOUR_USERNAME_WEB
+   PASSWORD_WEB=YOUR_PASSWORD_WEB
    API_URL=YOUR_API_URL
    ```
   
