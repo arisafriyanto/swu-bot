@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./../assets/images/swu.png" type="image/png" />
+    <title>Home</title>
+    <link rel="stylesheet" href="./../assets/styles.css" />
+  </head>
+  <body class="relative min-h-screen font-inter">
+    <%- include("header") %>
+
+    <main class="text-gray-600">
+      <div class="container mx-auto flex flex-col px-5 py-10 sm:py-20 justify-center items-center">
+        <% if (qr) { %>
+        <img class="lg:w-2/12 md:w-4/12 sm:w-6/12 w-6/12 mb-10 object-cover object-center rounded" src="<%=qr%>" alt="WhatsApp QR Code" />
+        <% } %>
+
+        <div class="w-full md:w-2/3 flex flex-col mb-16 items-center text-center">
+          <a
+            href="/scan"
+            class="flex items-center px-4 py-2 font-medium tracking-wide text-black capitalize border-2 border-gray-200 transition-colors duration-300 transform bg-gray-100 focus:outline-none hover:bg-gray-200 text-sm sm:text-base mt-4 md:mt-0 rounded-xl focus:ring focus:ring-gray-100 focus:ring-opacity-80 mb-10"
+          >
+            <svg class="w-5 h-5 mx-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                fill-rule="evenodd"
+                d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span class="mx-1">Refresh</span>
+          </a>
+
+          <% if (qr) { %>
+          <h1 class="text-xl sm:text-2xl xl:text-[27px] mb-3.5 font-medium text-gray-900">Silahkan Scan QR Code untuk terhubung dengan WhatsApp</h1>
+          <% }else if(success){ %>
+          <h1 class="text-xl sm:text-2xl xl:text-[27px] mb-3.5 font-medium text-gray-900"><%=success%></h1>
+          <% }else{ %>
+          <h1 class="text-xl sm:text-2xl xl:text-[27px] mb-3.5 font-medium text-gray-900">Silakan klik tombol refresh untuk menampilkan QR Code</h1>
+          <% } %>
+
+          <p class="mb-[1.55rem] px-3 md:px-8 xl:px-28 leading-relaxed text-justify sm:text-center text-sm sm:text-[15px]">
+            Jika Anda ingin beralih nomor WhatsApp dan memindai ulang dengan nomor WhatsApp yang berbeda, Anda harus keluar dari Aplikasi WhatsApp dan menunggu selama 1 menit.
+            Setelah itu, klik tombol refresh dan QR Code WhatsApp akan diperbarui.
+          </p>
+
+          <% if(deviceInfo) { %>
+          <section class="text-gray-600">
+            <div class="container px-5 py-1 flex justify-center">
+              <div class="xl:w-8/12 md:w-8/12 sm:w-8/12 w-12/12 p-2 sm:p-4">
+                <div class="border border-gray-200 p-6 rounded-lg">
+                  <div class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mb-4">
+                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6" viewBox="0 0 24 24">
+                      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </div>
+                  <h2 class="text-lg text-gray-900 font-medium title-font leading-6"><%= deviceInfo.fullName %></h2>
+                  <h3 class="text-sm text-slate-700 font-light title-font mb-2"><%= deviceInfo.platform %></h3>
+                  <p class="leading-relaxed text-sm sm:text-base">Anda adalah admin kampus yang terhubung dengan WhatsApp.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <% } %>
+        </div>
+      </div>
+    </main>
+
+    <%- include("footer") %>
+  </body>
+</html>
